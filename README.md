@@ -1,13 +1,13 @@
 # react-daytime
 
-__COMPONENT DESCRIPTION GOES HERE__
+![react-daytime screenshot](/screenshots/01.png?raw=true)
 
 
-## Demo & Examples
+## Demo
 
 Live demo: [schowdhuri.github.io/react-daytime](http://schowdhuri.github.io/react-daytime/)
 
-To build the examples locally, run:
+To build the example locally, run:
 
 ```
 npm install
@@ -71,9 +71,10 @@ __Sample selection object__
 
 ## Development (`src`, `lib` and the build process)
 
-**NOTE:** The source code for the component is in `src`. A transpiled CommonJS version (generated with Babel) is available in `lib` for use with node.js, browserify and webpack. A UMD bundle is also built to `dist`, which can be included without the need for any build system.
-
 To build, watch and serve the examples (which will also watch the component source), run `npm start`. If you just want to watch changes to `src` and rebuild `lib`, run `npm run watch` (this is useful if you are working with `npm link`).
+
+The source code for the component is in `src`. A transpiled CommonJS version (generated with Babel) is available in `lib` for use with node.js, browserify and webpack. A UMD bundle is also built to `dist`, which can be included without the need for any build system.
+
 
 ## License
 
