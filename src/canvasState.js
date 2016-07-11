@@ -8,3 +8,7 @@ export const dragState = {
     dragging: false,
     paintSelected: true
 };
+
+export const callbacks = {
+    onChange: f => f
+}
