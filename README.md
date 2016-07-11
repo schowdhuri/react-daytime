@@ -30,22 +30,41 @@ npm install react-daytime --save
 
 ## Usage
 
-__EXPLAIN USAGE HERE__
-
 ```
 import ReactDaytime from 'react-daytime';
 
-<ReactDaytime />
+<ReactDaytime onChange={handleChange} theme={colorTheme} defaultValue={defaultValue} />
 ```
 
-### Properties
+### Props
 
-* __DOCUMENT PROPERTIES HERE__
+* `onChange` - fired every time the selection is changed. The event handler is passed the new selection state. The value is an object of the form `{ [day]: [ Array of selected hours ] }`. See sample selection object below.
+* `theme` - changes the color scheme. See sample theme object below.
+* `defaultValue` - sets the initial selection
 
-### Notes
+__Sample `theme` object__
+```
+{
+  cell: {
+    backgroundColor: [ "#f2f2f2", "#3de3e6" ]
+  },
+  header: {
+    color: [ "#000000", "#ffffff" ],
+    backgroundColor: [ "#97e0c0", "#4f806a" ]
+  },
+  border: {
+    color: "#fff"
+  }
+}
+```
 
-__ADDITIONAL USAGE NOTES__
-
+__Sample selection object__
+```
+{
+  "Fri": [ 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 0 ],
+  "Mon": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+```
 
 ## Development (`src`, `lib` and the build process)
 
