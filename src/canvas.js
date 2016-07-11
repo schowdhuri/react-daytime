@@ -6,8 +6,9 @@ import { state, hourState, dayState, dragState, callbacks } from "./canvasState"
 import Theme from "./theme";
 
 export default class DayTimeCanvas {
-    constructor(onChange, customTheme) {
+    constructor(onChange, defaultValue, customTheme) {
         this.theme = new Theme(customTheme);
+        this.defaultValue = defaultValue;
         callbacks.onChange = onChange;
     }
 
@@ -107,7 +108,6 @@ export default class DayTimeCanvas {
     _flipCell(cellState) {
         const selected = !cellState.selected;
         this._setState(cellState, selected);
-        console.log("flipped cell");
         this._fireChangeEvent();
         return selected;
     }
@@ -248,6 +248,16 @@ export default class DayTimeCanvas {
         filler.fillColor = this.theme.header.backgroundColor[0];
     }
 
+    _populateDefaultState() {
+        // set defaultValue
+        CONSTANTS.DAYS.forEach((day, dayNum) => {
+            CONSTANTS.HOURS.forEach((hour, hourNum) => {
+                if(this.defaultValue && day in this.defaultValue && this.defaultValue[day].indexOf(hourNum) >= 0)
+                    this._setState(state[dayNum][hourNum], true);
+            });
+        });
+    }
+
     _attachEvents() {
         // Marquee Select
         paper.view.on("mousedrag", ev => {
@@ -281,6 +291,7 @@ export default class DayTimeCanvas {
         this._drawColHeader();
         this._drawFiller();
         this._drawSlots();
+        this._populateDefaultState();
         this._attachEvents();
     }
 }

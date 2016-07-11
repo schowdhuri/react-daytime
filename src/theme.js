@@ -7,8 +7,7 @@ const COLOR_HEADER = "#fff";
 const COLOR_HEADER_SELECTED = "#fff";
 
 export default class Theme {
-    constructor(customTheme) {
-        customTheme = customTheme || {};
+    constructor(customTheme={}) {
         if(customTheme.cell) {
             this.cell = {
                 backgroundColor: [

@@ -10,7 +10,7 @@ class ReactDaytime extends React.Component {
         this.canvasId = "react-daytime-" + uuid();
     }
     componentWillMount() {
-        this.canvas = new DayTimeCanvas(this.props.onChange, this.props.theme, );
+        this.canvas = new DayTimeCanvas(this.props.onChange, this.props.defaultValue, this.props.theme);
     }
     componentDidMount() {
         this.canvas.render(this.canvasId);
