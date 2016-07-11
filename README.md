@@ -43,6 +43,7 @@ import ReactDaytime from 'react-daytime';
 * `defaultValue` - sets the initial selection
 
 __Sample `theme` object__
+
 Colors are saved as arrays.  The first color in the array is used for 'normal' state and the second for 'selected' state.
 
 ```

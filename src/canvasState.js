@@ -11,4 +11,4 @@ export const dragState = {
 
 export const callbacks = {
     onChange: f => f
-}
+};

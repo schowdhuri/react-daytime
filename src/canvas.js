@@ -1,9 +1,9 @@
-import paper from "paper";
+import paper from 'paper';
 
-import * as CONSTANTS from "./constants";
-import { state, hourState, dayState, dragState, callbacks } from "./canvasState";
+import * as CONSTANTS from './constants';
+import { state, hourState, dayState, dragState, callbacks } from './canvasState';
 
-import Theme from "./theme";
+import Theme from './theme';
 
 export default class DayTimeCanvas {
     constructor(onChange, defaultValue, customTheme) {
@@ -16,8 +16,9 @@ export default class DayTimeCanvas {
         let found = null;
         state.forEach(row => {
             row.forEach(slot => {
-                if(slot.cell.hitTest(point))
+                if(slot.cell.hitTest(point)) {
                     found = slot;
+                }
             });
         });
         return found;
@@ -27,8 +28,9 @@ export default class DayTimeCanvas {
         const marquee = new paper.Rectangle(p1, p2);
         state.forEach(row => {
             row.forEach(slot => {
-                if(slot.cell.isInside(marquee) || slot.cell.bounds.intersects(marquee))
+                if(slot.cell.isInside(marquee) || slot.cell.bounds.intersects(marquee)) {
                     callback(slot);
+                }
             });
         });
     }
@@ -60,7 +62,7 @@ export default class DayTimeCanvas {
 
     _fireChangeEvent() {
         const result = {};
-        if(typeof(callbacks.onChange)==="function") {
+        if(typeof(callbacks.onChange)==='function') {
             state.forEach((row, rownum) => {
                 const selectedHours = [];
                 row.forEach((col, colnum) => {
@@ -155,10 +157,10 @@ export default class DayTimeCanvas {
                     y2: topLeft.y + CONSTANTS.CELL_HEIGHT
                 };
                 ((day, hour, slot) => {
-                    slot.on("click", ev => {
+                    slot.on('click', ev => {
                         this._flipCell(state[day][hour]);
                     });
-                    slot.on("mousedrag", f => f);
+                    slot.on('mousedrag', f => f);
                 })(i, j, path);
             }
         }
@@ -193,9 +195,9 @@ export default class DayTimeCanvas {
             ((day, slot) => {
                 const selectAllHours = ev => {
                     this._flipRow(dayState, day);
-                }
-                slot.on("click", selectAllHours);
-                label.on("click", selectAllHours);
+                };
+                slot.on('click', selectAllHours);
+                label.on('click', selectAllHours);
             })(i, path);
         }
     }
@@ -230,9 +232,9 @@ export default class DayTimeCanvas {
             ((hour, slot) => {
                 const selectAllDays = () => {
                     this._flipCol(hourState, hour);
-                }
-                label.on("click", selectAllDays);
-                slot.on("click", selectAllDays);
+                };
+                label.on('click', selectAllDays);
+                slot.on('click', selectAllDays);
             })(i, path);
         }
     }
@@ -252,15 +254,16 @@ export default class DayTimeCanvas {
         // set defaultValue
         CONSTANTS.DAYS.forEach((day, dayNum) => {
             CONSTANTS.HOURS.forEach((hour, hourNum) => {
-                if(this.defaultValue && day in this.defaultValue && this.defaultValue[day].indexOf(hourNum) >= 0)
+                if(this.defaultValue && day in this.defaultValue && this.defaultValue[day].indexOf(hourNum) >= 0) {
                     this._setState(state[dayNum][hourNum], true);
+                }
             });
         });
     }
 
     _attachEvents() {
         // Marquee Select
-        paper.view.on("mousedrag", ev => {
+        paper.view.on('mousedrag', ev => {
             const pos = ev.point;
             if(!dragState.dragging) {
                 dragState.dragging = true;
@@ -277,7 +280,7 @@ export default class DayTimeCanvas {
             });
         });
         // End drag-mode
-        paper.view.on("mouseup", ev => {
+        paper.view.on('mouseup', ev => {
             if(dragState.dragging) {
                 dragState.dragging = false;
                 this._onDragEnd();

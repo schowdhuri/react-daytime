@@ -1,13 +1,13 @@
-import React from "react";
-import uuid from "uuid4";
+import React from 'react';
+import uuid from 'uuid4';
 
-import DayTimeCanvas from "./canvas";
-import { WIDTH, HEIGHT } from "./constants";
+import DayTimeCanvas from './canvas';
+import { WIDTH, HEIGHT } from './constants';
 
 class ReactDaytime extends React.Component {
     constructor(props) {
         super(props);
-        this.canvasId = "react-daytime-" + uuid();
+        this.canvasId = 'react-daytime-' + uuid();
     }
     componentWillMount() {
         this.canvas = new DayTimeCanvas(this.props.onChange, this.props.defaultValue, this.props.theme);
@@ -19,5 +19,10 @@ class ReactDaytime extends React.Component {
 		return <canvas id={this.canvasId} width={WIDTH} height={HEIGHT}></canvas>;
 	}
 }
+ReactDaytime.propTypes = {
+    defaultValue: React.PropTypes.object,
+    onChange: React.PropTypes.func,
+    theme: React.PropTypes.object
+};
 
 export default ReactDaytime;

@@ -1,10 +1,10 @@
-const COLOR_SELECTED = "#7cdc4b";
-const COLOR_UNSELECTED = "#e3e3e4";
-const COLOR_BORDER = "#f2f2f2";
-const COLOR_HEADER_BG = "#777572";
-const COLOR_HEADER_BG_SELECTED = "#61c72d";
-const COLOR_HEADER = "#fff";
-const COLOR_HEADER_SELECTED = "#fff";
+const COLOR_SELECTED = '#7cdc4b';
+const COLOR_UNSELECTED = '#e3e3e4';
+const COLOR_BORDER = '#f2f2f2';
+const COLOR_HEADER_BG = '#777572';
+const COLOR_HEADER_BG_SELECTED = '#61c72d';
+const COLOR_HEADER = '#fff';
+const COLOR_HEADER_SELECTED = '#fff';
 
 export default class Theme {
     constructor(customTheme={}) {
