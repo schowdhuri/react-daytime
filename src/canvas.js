@@ -239,15 +239,32 @@ export default class DayTimeCanvas {
         }
     }
 
-    _drawFiller() {
+    _drawResetButton() {
         // filler
-        const filler = new paper.Path.Rectangle(
+        const btnReset = new paper.Path.Rectangle(
             new paper.Rectangle(
                 new paper.Point(0,0),
                 new paper.Size(CONSTANTS.STARTX, CONSTANTS.STARTY)
             )
         );
-        filler.fillColor = this.theme.header.backgroundColor[0];
+        btnReset.fillColor = this.theme.header.backgroundColor[0];
+
+        const label = new paper.PointText();
+        label.content = "CLEAR";
+        label.fontSize = 10;
+        label.fillColor = this.theme.header.color[0];
+        label.position = new paper.Point(CONSTANTS.STARTX/2, CONSTANTS.STARTY/2);
+
+        const resetState = () => {
+            CONSTANTS.DAYS.forEach((day, dayNum) => {
+                CONSTANTS.HOURS.forEach((hour, hourNum) => {
+                    this._setState(state[dayNum][hourNum], false);
+                });
+            });
+            this._fireChangeEvent();
+        }
+        label.on("click", resetState);
+        btnReset.on("click", resetState);
     }
 
     _populateDefaultState() {
@@ -292,7 +309,7 @@ export default class DayTimeCanvas {
         paper.setup(canvasId);
         this._drawRowHeader();
         this._drawColHeader();
-        this._drawFiller();
+        this._drawResetButton();
         this._drawSlots();
         this._populateDefaultState();
         this._attachEvents();
