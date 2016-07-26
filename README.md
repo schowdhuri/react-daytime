@@ -42,7 +42,7 @@ import ReactDaytime from 'react-daytime';
 * `theme` - changes the color scheme. See sample theme object below.
 * `defaultValue` - sets the initial selection
 
-__Sample `theme` __
+__Sample theme__
 
 Colors are saved as arrays.  The first color in the array is used for 'normal' state and the second for 'selected' state.
 
