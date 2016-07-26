@@ -42,7 +42,7 @@ import ReactDaytime from 'react-daytime';
 * `theme` - changes the color scheme. See sample theme object below.
 * `defaultValue` - sets the initial selection
 
-__Sample `theme` object__
+__Sample `theme` __
 
 Colors are saved as arrays.  The first color in the array is used for 'normal' state and the second for 'selected' state.
 
@@ -53,7 +53,8 @@ Colors are saved as arrays.  The first color in the array is used for 'normal' s
   },
   header: {
     color: [ "#000000", "#ffffff" ],
-    backgroundColor: [ "#97e0c0", "#4f806a" ]
+    backgroundColor: [ "#97e0c0", "#4f806a" ],
+    fontFamily: "Roboto, sans-serif"
   },
   border: {
     color: "#fff" // there is no selected border color

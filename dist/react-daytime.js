@@ -35325,6 +35325,16 @@ var DayTimeCanvas = (function () {
             this._fireChangeEvent();
         }
     }, {
+        key: '_cursorPointer',
+        value: function _cursorPointer() {
+            document.body.style.cursor = 'pointer';
+        }
+    }, {
+        key: '_cursorDefault',
+        value: function _cursorDefault() {
+            document.body.style.cursor = '';
+        }
+    }, {
         key: '_drawSlots',
         value: function _drawSlots() {
             var _this = this;
@@ -35361,8 +35371,8 @@ var DayTimeCanvas = (function () {
             }
         }
     }, {
-        key: '_drawColHeader',
-        value: function _drawColHeader() {
+        key: '_drawRowHeader',
+        value: function _drawRowHeader() {
             var _this2 = this;
 
             // DAY CONTROLLERS
@@ -35377,11 +35387,17 @@ var DayTimeCanvas = (function () {
 
                 var label = new _paper2['default'].PointText();
                 label.content = CONSTANTS.DAYS[i];
-                label.fillColor = _this2.theme.header.color[0];
                 label.position = new _paper2['default'].Point(CONSTANTS.STARTX / 2, topLeft.y + CONSTANTS.CELL_HEIGHT / 2);
-
-                path.fillColor = _this2.theme.header.backgroundColor[0];
-                path.strokeColor = _this2.theme.border.color;
+                label.style = {
+                    fillColor: _this2.theme.header.color[0]
+                };
+                if (_this2.theme.header.fontFamily) {
+                    label.style.fontFamily = _this2.theme.header.fontFamily;
+                }
+                path.style = {
+                    fillColor: _this2.theme.header.backgroundColor[0],
+                    strokeColor: _this2.theme.border.color
+                };
 
                 _canvasState.dayState[i] = {
                     cell: path,
@@ -35398,6 +35414,10 @@ var DayTimeCanvas = (function () {
                     };
                     slot.on('click', selectAllHours);
                     label.on('click', selectAllHours);
+                    label.on('mouseenter', _this2._cursorPointer);
+                    label.on('mouseleave', _this2._cursorDefault);
+                    slot.on('mouseenter', _this2._cursorPointer);
+                    slot.on('mouseleave', _this2._cursorDefault);
                 })(i, path);
             };
 
@@ -35406,8 +35426,8 @@ var DayTimeCanvas = (function () {
             }
         }
     }, {
-        key: '_drawRowHeader',
-        value: function _drawRowHeader() {
+        key: '_drawColHeader',
+        value: function _drawColHeader() {
             var _this3 = this;
 
             // HOUR CONTROLLERS
@@ -35422,12 +35442,18 @@ var DayTimeCanvas = (function () {
 
                 var label = new _paper2['default'].PointText();
                 label.content = CONSTANTS.HOURS[i];
-                label.fillColor = _this3.theme.header.color[0];
                 label.position = new _paper2['default'].Point(topLeft.x + CONSTANTS.CELL_WIDTH / 2, topLeft.y + CONSTANTS.STARTY / 2);
                 label.rotation = -90;
-
-                path.fillColor = _this3.theme.header.backgroundColor[0];
-                path.strokeColor = _this3.theme.border.color;
+                label.style = {
+                    fillColor: _this3.theme.header.color[0]
+                };
+                if (_this3.theme.header.fontFamily) {
+                    label.style.fontFamily = _this3.theme.header.fontFamily;
+                }
+                path.style = {
+                    fillColor: _this3.theme.header.backgroundColor[0],
+                    strokeColor: _this3.theme.border.color
+                };
 
                 _canvasState.hourState[i] = {
                     cell: path,
@@ -35444,6 +35470,10 @@ var DayTimeCanvas = (function () {
                     };
                     label.on('click', selectAllDays);
                     slot.on('click', selectAllDays);
+                    label.on('mouseenter', _this3._cursorPointer);
+                    label.on('mouseleave', _this3._cursorDefault);
+                    slot.on('mouseenter', _this3._cursorPointer);
+                    slot.on('mouseleave', _this3._cursorDefault);
                 })(i, path);
             };
 
@@ -35458,14 +35488,19 @@ var DayTimeCanvas = (function () {
 
             // filler
             var btnReset = new _paper2['default'].Path.Rectangle(new _paper2['default'].Rectangle(new _paper2['default'].Point(0, 0), new _paper2['default'].Size(CONSTANTS.STARTX, CONSTANTS.STARTY)));
-            btnReset.fillColor = this.theme.header.backgroundColor[0];
-
             var label = new _paper2['default'].PointText();
-            label.content = "CLEAR";
-            label.fontSize = 10;
-            label.fillColor = this.theme.header.color[0];
+            label.style = {
+                fillColor: this.theme.header.color[0],
+                fontSize: 10
+            };
+            if (this.theme.header.fontFamily) {
+                label.style.fontFamily = this.theme.header.fontFamily;
+            }
+            label.content = 'CLEAR';
             label.position = new _paper2['default'].Point(CONSTANTS.STARTX / 2, CONSTANTS.STARTY / 2);
-
+            btnReset.style = {
+                fillColor: this.theme.header.backgroundColor[0]
+            };
             var resetState = function resetState() {
                 CONSTANTS.DAYS.forEach(function (day, dayNum) {
                     CONSTANTS.HOURS.forEach(function (hour, hourNum) {
@@ -35474,8 +35509,12 @@ var DayTimeCanvas = (function () {
                 });
                 _this4._fireChangeEvent();
             };
-            label.on("click", resetState);
-            btnReset.on("click", resetState);
+            label.on('click', resetState);
+            btnReset.on('click', resetState);
+            label.on('mouseenter', this._cursorPointer);
+            label.on('mouseleave', this._cursorDefault);
+            btnReset.on('mouseenter', this._cursorPointer);
+            btnReset.on('mouseleave', this._cursorDefault);
         }
     }, {
         key: '_populateDefaultState',
@@ -35643,7 +35682,8 @@ var Theme = function Theme() {
     if (customTheme.header) {
         this.header = {
             color: [customTheme.header.color && customTheme.header.color[0] || COLOR_HEADER, customTheme.header.color && customTheme.header.color[1] || COLOR_HEADER_SELECTED],
-            backgroundColor: [customTheme.header.backgroundColor && customTheme.header.backgroundColor[0] || COLOR_HEADER_BG, customTheme.header.backgroundColor && customTheme.header.backgroundColor[1] || COLOR_HEADER_BG_SELECTED]
+            backgroundColor: [customTheme.header.backgroundColor && customTheme.header.backgroundColor[0] || COLOR_HEADER_BG, customTheme.header.backgroundColor && customTheme.header.backgroundColor[1] || COLOR_HEADER_BG_SELECTED],
+            fontFamily: customTheme.header.fontFamily || ''
         };
     } else {
         this.header = {

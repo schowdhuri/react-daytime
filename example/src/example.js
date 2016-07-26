@@ -6,13 +6,14 @@ class App extends React.Component {
     constructor() {
         super();
         this.handleChange = this.handleChange.bind(this);
-        this.colorTheme = {
+        this.theme = {
             cell: {
                 backgroundColor: [ '#f2f2f2', '#3de3e6' ]
             },
             header: {
                 color: [ '#000000', '#ffffff' ],
-                backgroundColor: [ '#97e0c0', '#4f806a' ]
+                backgroundColor: [ '#97e0c0', '#4f806a' ],
+                fontFamily: '"Roboto Condensed", sans-serif'
             },
             border: {
                 color: '#fff'
@@ -29,7 +30,10 @@ class App extends React.Component {
         };
 		return (
 			<div>
-				<ReactDaytime onChange={this.handleChange} theme={this.colorTheme} defaultValue={defaultValue} />
+				<ReactDaytime
+                    defaultValue={defaultValue}
+                    onChange={this.handleChange}
+                    theme={this.theme} />
 			</div>
 		);
 	}

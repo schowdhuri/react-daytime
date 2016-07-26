@@ -29,7 +29,8 @@ export default class Theme {
                 backgroundColor: [
                     customTheme.header.backgroundColor && customTheme.header.backgroundColor[0] || COLOR_HEADER_BG,
                     customTheme.header.backgroundColor && customTheme.header.backgroundColor[1] || COLOR_HEADER_BG_SELECTED
-                ]
+                ],
+                fontFamily: customTheme.header.fontFamily || ''
             };
         } else {
             this.header = {

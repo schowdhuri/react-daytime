@@ -136,6 +136,14 @@ export default class DayTimeCanvas {
         this._fireChangeEvent();
     }
 
+    _cursorPointer() {
+        document.body.style.cursor = 'pointer';
+    }
+
+    _cursorDefault() {
+        document.body.style.cursor = '';
+    }
+
     _drawSlots() {
         let i, j;
         for(i=0; i<7; i++) {
@@ -166,7 +174,7 @@ export default class DayTimeCanvas {
         }
     }
 
-    _drawColHeader() {
+    _drawRowHeader() {
         // DAY CONTROLLERS
         let i, j;
         for(i=0; i<7; i++) {
@@ -177,11 +185,17 @@ export default class DayTimeCanvas {
 
             const label = new paper.PointText();
             label.content = CONSTANTS.DAYS[i];
-            label.fillColor = this.theme.header.color[0];
             label.position = new paper.Point(CONSTANTS.STARTX/2, topLeft.y + CONSTANTS.CELL_HEIGHT/2);
-
-            path.fillColor = this.theme.header.backgroundColor[0];
-            path.strokeColor = this.theme.border.color;
+            label.style = {
+                fillColor: this.theme.header.color[0]
+            };
+            if(this.theme.header.fontFamily) {
+                label.style.fontFamily = this.theme.header.fontFamily;
+            }
+            path.style = {
+                fillColor: this.theme.header.backgroundColor[0],
+                strokeColor: this.theme.border.color
+            };
 
             dayState[i] = {
                 cell: path,
@@ -198,11 +212,15 @@ export default class DayTimeCanvas {
                 };
                 slot.on('click', selectAllHours);
                 label.on('click', selectAllHours);
+                label.on('mouseenter', this._cursorPointer);
+                label.on('mouseleave', this._cursorDefault);
+                slot.on('mouseenter', this._cursorPointer);
+                slot.on('mouseleave', this._cursorDefault);
             })(i, path);
         }
     }
 
-    _drawRowHeader() {
+    _drawColHeader() {
         // HOUR CONTROLLERS
         let i, j;
         for(i=0; i<24; i++) {
@@ -213,12 +231,18 @@ export default class DayTimeCanvas {
 
             const label = new paper.PointText();
             label.content = CONSTANTS.HOURS[i];
-            label.fillColor = this.theme.header.color[0];
             label.position = new paper.Point(topLeft.x + CONSTANTS.CELL_WIDTH/2, topLeft.y + CONSTANTS.STARTY/2);
             label.rotation = -90;
-
-            path.fillColor = this.theme.header.backgroundColor[0];
-            path.strokeColor = this.theme.border.color;
+            label.style = {
+                fillColor: this.theme.header.color[0]
+            };
+            if(this.theme.header.fontFamily) {
+                label.style.fontFamily = this.theme.header.fontFamily;
+            }
+            path.style = {
+                fillColor: this.theme.header.backgroundColor[0],
+                strokeColor: this.theme.border.color
+            };
 
             hourState[i] = {
                 cell: path,
@@ -235,6 +259,10 @@ export default class DayTimeCanvas {
                 };
                 label.on('click', selectAllDays);
                 slot.on('click', selectAllDays);
+                label.on('mouseenter', this._cursorPointer);
+                label.on('mouseleave', this._cursorDefault);
+                slot.on('mouseenter', this._cursorPointer);
+                slot.on('mouseleave', this._cursorDefault);
             })(i, path);
         }
     }
@@ -247,14 +275,19 @@ export default class DayTimeCanvas {
                 new paper.Size(CONSTANTS.STARTX, CONSTANTS.STARTY)
             )
         );
-        btnReset.fillColor = this.theme.header.backgroundColor[0];
-
         const label = new paper.PointText();
-        label.content = "CLEAR";
-        label.fontSize = 10;
-        label.fillColor = this.theme.header.color[0];
+        label.style = {
+            fillColor: this.theme.header.color[0],
+            fontSize: 10
+        };
+        if(this.theme.header.fontFamily) {
+            label.style.fontFamily = this.theme.header.fontFamily;
+        }
+        label.content = 'CLEAR';
         label.position = new paper.Point(CONSTANTS.STARTX/2, CONSTANTS.STARTY/2);
-
+        btnReset.style = {
+            fillColor: this.theme.header.backgroundColor[0]
+        };
         const resetState = () => {
             CONSTANTS.DAYS.forEach((day, dayNum) => {
                 CONSTANTS.HOURS.forEach((hour, hourNum) => {
@@ -262,9 +295,13 @@ export default class DayTimeCanvas {
                 });
             });
             this._fireChangeEvent();
-        }
-        label.on("click", resetState);
-        btnReset.on("click", resetState);
+        };
+        label.on('click', resetState);
+        btnReset.on('click', resetState);
+        label.on('mouseenter', this._cursorPointer);
+        label.on('mouseleave', this._cursorDefault);
+        btnReset.on('mouseenter', this._cursorPointer);
+        btnReset.on('mouseleave', this._cursorDefault);
     }
 
     _populateDefaultState() {
