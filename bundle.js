@@ -35079,31 +35079,31 @@ exports.createContext = Script.createContext = function (context) {
 };
 
 },{"indexof":89}],134:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _paper = require("paper");
+var _paper = require('paper');
 
 var _paper2 = _interopRequireDefault(_paper);
 
-var _constants = require("./constants");
+var _constants = require('./constants');
 
 var CONSTANTS = _interopRequireWildcard(_constants);
 
-var _canvasState = require("./canvasState");
+var _canvasState = require('./canvasState');
 
-var _theme = require("./theme");
+var _theme = require('./theme');
 
 var _theme2 = _interopRequireDefault(_theme);
 
@@ -35111,34 +35111,38 @@ var DayTimeCanvas = (function () {
     function DayTimeCanvas(onChange, defaultValue, customTheme) {
         _classCallCheck(this, DayTimeCanvas);
 
-        this.theme = new _theme2["default"](customTheme);
+        this.theme = new _theme2['default'](customTheme);
         this.defaultValue = defaultValue;
         _canvasState.callbacks.onChange = onChange;
     }
 
     _createClass(DayTimeCanvas, [{
-        key: "_findCell",
+        key: '_findCell',
         value: function _findCell(point) {
             var found = null;
             _canvasState.state.forEach(function (row) {
                 row.forEach(function (slot) {
-                    if (slot.cell.hitTest(point)) found = slot;
+                    if (slot.cell.hitTest(point)) {
+                        found = slot;
+                    }
                 });
             });
             return found;
         }
     }, {
-        key: "_findAllSelected",
+        key: '_findAllSelected',
         value: function _findAllSelected(p1, p2, callback) {
-            var marquee = new _paper2["default"].Rectangle(p1, p2);
+            var marquee = new _paper2['default'].Rectangle(p1, p2);
             _canvasState.state.forEach(function (row) {
                 row.forEach(function (slot) {
-                    if (slot.cell.isInside(marquee) || slot.cell.bounds.intersects(marquee)) callback(slot);
+                    if (slot.cell.isInside(marquee) || slot.cell.bounds.intersects(marquee)) {
+                        callback(slot);
+                    }
                 });
             });
         }
     }, {
-        key: "_syncHeaderState",
+        key: '_syncHeaderState',
         value: function _syncHeaderState() {
             var selected = undefined;
             var i = undefined,
@@ -35165,10 +35169,10 @@ var DayTimeCanvas = (function () {
             }
         }
     }, {
-        key: "_fireChangeEvent",
+        key: '_fireChangeEvent',
         value: function _fireChangeEvent() {
             var result = {};
-            if (typeof _canvasState.callbacks.onChange === "function") {
+            if (typeof _canvasState.callbacks.onChange === 'function') {
                 _canvasState.state.forEach(function (row, rownum) {
                     var selectedHours = [];
                     row.forEach(function (col, colnum) {
@@ -35184,7 +35188,7 @@ var DayTimeCanvas = (function () {
             }
         }
     }, {
-        key: "_setState",
+        key: '_setState',
         value: function _setState(cellState, selected) {
             cellState.selected = selected;
             if (selected) {
@@ -35196,7 +35200,7 @@ var DayTimeCanvas = (function () {
             return cellState;
         }
     }, {
-        key: "_setHeaderState",
+        key: '_setHeaderState',
         value: function _setHeaderState(cellState, selected) {
             cellState.selected = selected;
             if (selected) {
@@ -35209,14 +35213,14 @@ var DayTimeCanvas = (function () {
             return _canvasState.state;
         }
     }, {
-        key: "_flipHeaderCell",
+        key: '_flipHeaderCell',
         value: function _flipHeaderCell(cellState) {
             var selected = !cellState.selected;
             this._setHeaderState(cellState, selected);
             return selected;
         }
     }, {
-        key: "_flipCell",
+        key: '_flipCell',
         value: function _flipCell(cellState) {
             var selected = !cellState.selected;
             this._setState(cellState, selected);
@@ -35224,7 +35228,7 @@ var DayTimeCanvas = (function () {
             return selected;
         }
     }, {
-        key: "_flipRow",
+        key: '_flipRow',
         value: function _flipRow(rowState, index) {
             var selected = this._flipHeaderCell(rowState[index]);
             var j = undefined;
@@ -35234,7 +35238,7 @@ var DayTimeCanvas = (function () {
             this._fireChangeEvent();
         }
     }, {
-        key: "_flipCol",
+        key: '_flipCol',
         value: function _flipCol(colState, index) {
             var selected = this._flipHeaderCell(colState[index]);
             var j = undefined;
@@ -35244,12 +35248,22 @@ var DayTimeCanvas = (function () {
             this._fireChangeEvent();
         }
     }, {
-        key: "_onDragEnd",
+        key: '_onDragEnd',
         value: function _onDragEnd() {
             this._fireChangeEvent();
         }
     }, {
-        key: "_drawSlots",
+        key: '_cursorPointer',
+        value: function _cursorPointer() {
+            document.body.style.cursor = 'pointer';
+        }
+    }, {
+        key: '_cursorDefault',
+        value: function _cursorDefault() {
+            document.body.style.cursor = '';
+        }
+    }, {
+        key: '_drawSlots',
         value: function _drawSlots() {
             var _this = this;
 
@@ -35258,10 +35272,10 @@ var DayTimeCanvas = (function () {
             for (i = 0; i < 7; i++) {
                 _canvasState.state[i] = [];
                 for (j = 0; j < 24; j++) {
-                    var topLeft = new _paper2["default"].Point(CONSTANTS.STARTX + j * CONSTANTS.CELL_WIDTH, CONSTANTS.STARTY + i * CONSTANTS.CELL_HEIGHT);
-                    var rectSize = new _paper2["default"].Size(CONSTANTS.CELL_WIDTH, CONSTANTS.CELL_HEIGHT);
-                    var rect = new _paper2["default"].Rectangle(topLeft, rectSize);
-                    var path = new _paper2["default"].Path.Rectangle(rect);
+                    var topLeft = new _paper2['default'].Point(CONSTANTS.STARTX + j * CONSTANTS.CELL_WIDTH, CONSTANTS.STARTY + i * CONSTANTS.CELL_HEIGHT);
+                    var rectSize = new _paper2['default'].Size(CONSTANTS.CELL_WIDTH, CONSTANTS.CELL_HEIGHT);
+                    var rect = new _paper2['default'].Rectangle(topLeft, rectSize);
+                    var path = new _paper2['default'].Path.Rectangle(rect);
                     path.fillColor = this.theme.cell.backgroundColor[0];
                     path.strokeColor = this.theme.border.color;
 
@@ -35274,10 +35288,10 @@ var DayTimeCanvas = (function () {
                         y2: topLeft.y + CONSTANTS.CELL_HEIGHT
                     };
                     (function (day, hour, slot) {
-                        slot.on("click", function (ev) {
+                        slot.on('click', function (ev) {
                             _this._flipCell(_canvasState.state[day][hour]);
                         });
-                        slot.on("mousedrag", function (f) {
+                        slot.on('mousedrag', function (f) {
                             return f;
                         });
                     })(i, j, path);
@@ -35285,8 +35299,8 @@ var DayTimeCanvas = (function () {
             }
         }
     }, {
-        key: "_drawColHeader",
-        value: function _drawColHeader() {
+        key: '_drawRowHeader',
+        value: function _drawRowHeader() {
             var _this2 = this;
 
             // DAY CONTROLLERS
@@ -35294,18 +35308,24 @@ var DayTimeCanvas = (function () {
                 j = undefined;
 
             var _loop = function () {
-                var topLeft = new _paper2["default"].Point(0, CONSTANTS.STARTY + i * CONSTANTS.CELL_HEIGHT);
-                var rectSize = new _paper2["default"].Size(CONSTANTS.STARTX, CONSTANTS.CELL_HEIGHT);
-                var rect = new _paper2["default"].Rectangle(topLeft, rectSize);
-                var path = new _paper2["default"].Path.Rectangle(rect);
+                var topLeft = new _paper2['default'].Point(0, CONSTANTS.STARTY + i * CONSTANTS.CELL_HEIGHT);
+                var rectSize = new _paper2['default'].Size(CONSTANTS.STARTX, CONSTANTS.CELL_HEIGHT);
+                var rect = new _paper2['default'].Rectangle(topLeft, rectSize);
+                var path = new _paper2['default'].Path.Rectangle(rect);
 
-                var label = new _paper2["default"].PointText();
+                var label = new _paper2['default'].PointText();
                 label.content = CONSTANTS.DAYS[i];
-                label.fillColor = _this2.theme.header.color[0];
-                label.position = new _paper2["default"].Point(CONSTANTS.STARTX / 2, topLeft.y + CONSTANTS.CELL_HEIGHT / 2);
-
-                path.fillColor = _this2.theme.header.backgroundColor[0];
-                path.strokeColor = _this2.theme.border.color;
+                label.position = new _paper2['default'].Point(CONSTANTS.STARTX / 2, topLeft.y + CONSTANTS.CELL_HEIGHT / 2);
+                label.style = {
+                    fillColor: _this2.theme.header.color[0]
+                };
+                if (_this2.theme.header.fontFamily) {
+                    label.style.fontFamily = _this2.theme.header.fontFamily;
+                }
+                path.style = {
+                    fillColor: _this2.theme.header.backgroundColor[0],
+                    strokeColor: _this2.theme.border.color
+                };
 
                 _canvasState.dayState[i] = {
                     cell: path,
@@ -35320,8 +35340,12 @@ var DayTimeCanvas = (function () {
                     var selectAllHours = function selectAllHours(ev) {
                         _this2._flipRow(_canvasState.dayState, day);
                     };
-                    slot.on("click", selectAllHours);
-                    label.on("click", selectAllHours);
+                    slot.on('click', selectAllHours);
+                    label.on('click', selectAllHours);
+                    label.on('mouseenter', _this2._cursorPointer);
+                    label.on('mouseleave', _this2._cursorDefault);
+                    slot.on('mouseenter', _this2._cursorPointer);
+                    slot.on('mouseleave', _this2._cursorDefault);
                 })(i, path);
             };
 
@@ -35330,8 +35354,8 @@ var DayTimeCanvas = (function () {
             }
         }
     }, {
-        key: "_drawRowHeader",
-        value: function _drawRowHeader() {
+        key: '_drawColHeader',
+        value: function _drawColHeader() {
             var _this3 = this;
 
             // HOUR CONTROLLERS
@@ -35339,19 +35363,25 @@ var DayTimeCanvas = (function () {
                 j = undefined;
 
             var _loop2 = function () {
-                var topLeft = new _paper2["default"].Point(CONSTANTS.STARTX + i * CONSTANTS.CELL_WIDTH, 0);
-                var rectSize = new _paper2["default"].Size(CONSTANTS.CELL_WIDTH, CONSTANTS.STARTY);
-                var rect = new _paper2["default"].Rectangle(topLeft, rectSize);
-                var path = new _paper2["default"].Path.Rectangle(rect);
+                var topLeft = new _paper2['default'].Point(CONSTANTS.STARTX + i * CONSTANTS.CELL_WIDTH, 0);
+                var rectSize = new _paper2['default'].Size(CONSTANTS.CELL_WIDTH, CONSTANTS.STARTY);
+                var rect = new _paper2['default'].Rectangle(topLeft, rectSize);
+                var path = new _paper2['default'].Path.Rectangle(rect);
 
-                var label = new _paper2["default"].PointText();
+                var label = new _paper2['default'].PointText();
                 label.content = CONSTANTS.HOURS[i];
-                label.fillColor = _this3.theme.header.color[0];
-                label.position = new _paper2["default"].Point(topLeft.x + CONSTANTS.CELL_WIDTH / 2, topLeft.y + CONSTANTS.STARTY / 2);
+                label.position = new _paper2['default'].Point(topLeft.x + CONSTANTS.CELL_WIDTH / 2, topLeft.y + CONSTANTS.STARTY / 2);
                 label.rotation = -90;
-
-                path.fillColor = _this3.theme.header.backgroundColor[0];
-                path.strokeColor = _this3.theme.border.color;
+                label.style = {
+                    fillColor: _this3.theme.header.color[0]
+                };
+                if (_this3.theme.header.fontFamily) {
+                    label.style.fontFamily = _this3.theme.header.fontFamily;
+                }
+                path.style = {
+                    fillColor: _this3.theme.header.backgroundColor[0],
+                    strokeColor: _this3.theme.border.color
+                };
 
                 _canvasState.hourState[i] = {
                     cell: path,
@@ -35366,8 +35396,12 @@ var DayTimeCanvas = (function () {
                     var selectAllDays = function selectAllDays() {
                         _this3._flipCol(_canvasState.hourState, hour);
                     };
-                    label.on("click", selectAllDays);
-                    slot.on("click", selectAllDays);
+                    label.on('click', selectAllDays);
+                    slot.on('click', selectAllDays);
+                    label.on('mouseenter', _this3._cursorPointer);
+                    label.on('mouseleave', _this3._cursorDefault);
+                    slot.on('mouseenter', _this3._cursorPointer);
+                    slot.on('mouseleave', _this3._cursorDefault);
                 })(i, path);
             };
 
@@ -35376,61 +35410,91 @@ var DayTimeCanvas = (function () {
             }
         }
     }, {
-        key: "_drawFiller",
-        value: function _drawFiller() {
+        key: '_drawResetButton',
+        value: function _drawResetButton() {
+            var _this4 = this;
+
             // filler
-            var filler = new _paper2["default"].Path.Rectangle(new _paper2["default"].Rectangle(new _paper2["default"].Point(0, 0), new _paper2["default"].Size(CONSTANTS.STARTX, CONSTANTS.STARTY)));
-            filler.fillColor = this.theme.header.backgroundColor[0];
+            var btnReset = new _paper2['default'].Path.Rectangle(new _paper2['default'].Rectangle(new _paper2['default'].Point(0, 0), new _paper2['default'].Size(CONSTANTS.STARTX, CONSTANTS.STARTY)));
+            var label = new _paper2['default'].PointText();
+            label.style = {
+                fillColor: this.theme.header.color[0],
+                fontSize: 10
+            };
+            if (this.theme.header.fontFamily) {
+                label.style.fontFamily = this.theme.header.fontFamily;
+            }
+            label.content = 'CLEAR';
+            label.position = new _paper2['default'].Point(CONSTANTS.STARTX / 2, CONSTANTS.STARTY / 2);
+            btnReset.style = {
+                fillColor: this.theme.header.backgroundColor[0]
+            };
+            var resetState = function resetState() {
+                CONSTANTS.DAYS.forEach(function (day, dayNum) {
+                    CONSTANTS.HOURS.forEach(function (hour, hourNum) {
+                        _this4._setState(_canvasState.state[dayNum][hourNum], false);
+                    });
+                });
+                _this4._fireChangeEvent();
+            };
+            label.on('click', resetState);
+            btnReset.on('click', resetState);
+            label.on('mouseenter', this._cursorPointer);
+            label.on('mouseleave', this._cursorDefault);
+            btnReset.on('mouseenter', this._cursorPointer);
+            btnReset.on('mouseleave', this._cursorDefault);
         }
     }, {
-        key: "_populateDefaultState",
+        key: '_populateDefaultState',
         value: function _populateDefaultState() {
-            var _this4 = this;
+            var _this5 = this;
 
             // set defaultValue
             CONSTANTS.DAYS.forEach(function (day, dayNum) {
                 CONSTANTS.HOURS.forEach(function (hour, hourNum) {
-                    if (_this4.defaultValue && day in _this4.defaultValue && _this4.defaultValue[day].indexOf(hourNum) >= 0) _this4._setState(_canvasState.state[dayNum][hourNum], true);
+                    if (_this5.defaultValue && day in _this5.defaultValue && _this5.defaultValue[day].indexOf(hourNum) >= 0) {
+                        _this5._setState(_canvasState.state[dayNum][hourNum], true);
+                    }
                 });
             });
         }
     }, {
-        key: "_attachEvents",
+        key: '_attachEvents',
         value: function _attachEvents() {
-            var _this5 = this;
+            var _this6 = this;
 
             // Marquee Select
-            _paper2["default"].view.on("mousedrag", function (ev) {
+            _paper2['default'].view.on('mousedrag', function (ev) {
                 var pos = ev.point;
                 if (!_canvasState.dragState.dragging) {
                     _canvasState.dragState.dragging = true;
                     _canvasState.dragState.dragStart = pos;
-                    _canvasState.dragState.startCell = _this5._findCell(pos);
+                    _canvasState.dragState.startCell = _this6._findCell(pos);
                     if (_canvasState.dragState.startCell) {
                         _canvasState.dragState.paintSelected = !_canvasState.dragState.startCell.selected;
                     } else {
                         _canvasState.dragState.paintSelected = true;
                     }
                 }
-                _this5._findAllSelected(_canvasState.dragState.dragStart, pos, function (slot) {
-                    _this5._setState(slot, _canvasState.dragState.paintSelected);
+                _this6._findAllSelected(_canvasState.dragState.dragStart, pos, function (slot) {
+                    _this6._setState(slot, _canvasState.dragState.paintSelected);
                 });
             });
             // End drag-mode
-            _paper2["default"].view.on("mouseup", function (ev) {
+            _paper2['default'].view.on('mouseup', function (ev) {
                 if (_canvasState.dragState.dragging) {
                     _canvasState.dragState.dragging = false;
-                    _this5._onDragEnd();
+                    _this6._onDragEnd();
                 }
             });
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render(canvasId) {
-            _paper2["default"].setup(canvasId);
+            _paper2['default'].setup(canvasId);
             this._drawRowHeader();
             this._drawColHeader();
-            this._drawFiller();
+            this._drawResetButton();
             this._drawSlots();
             this._populateDefaultState();
             this._attachEvents();
@@ -35440,8 +35504,8 @@ var DayTimeCanvas = (function () {
     return DayTimeCanvas;
 })();
 
-exports["default"] = DayTimeCanvas;
-module.exports = exports["default"];
+exports['default'] = DayTimeCanvas;
+module.exports = exports['default'];
 
 },{"./canvasState":135,"./constants":136,"./theme":137,"paper":95}],135:[function(require,module,exports){
 "use strict";
@@ -35472,9 +35536,9 @@ var callbacks = {
 exports.callbacks = callbacks;
 
 },{}],136:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
                         value: true
 });
 var CELL_WIDTH = 25;
@@ -35492,42 +35556,42 @@ exports.WIDTH = WIDTH;
 var HEIGHT = CELL_HEIGHT * 7 + STARTY;
 
 exports.HEIGHT = HEIGHT;
-var COLOR_SELECTED = "#7cdc4b";
+var COLOR_SELECTED = '#7cdc4b';
 exports.COLOR_SELECTED = COLOR_SELECTED;
-var COLOR_UNSELECTED = "#e3e3e4";
+var COLOR_UNSELECTED = '#e3e3e4';
 exports.COLOR_UNSELECTED = COLOR_UNSELECTED;
-var COLOR_BORDER = "#f2f2f2";
+var COLOR_BORDER = '#f2f2f2';
 exports.COLOR_BORDER = COLOR_BORDER;
-var COLOR_HEADER_BG = "#777572";
+var COLOR_HEADER_BG = '#777572';
 exports.COLOR_HEADER_BG = COLOR_HEADER_BG;
-var COLOR_HEADER_BG_SELECTED = "#61c72d";
+var COLOR_HEADER_BG_SELECTED = '#61c72d';
 exports.COLOR_HEADER_BG_SELECTED = COLOR_HEADER_BG_SELECTED;
-var COLOR_HEADER = "#fff";
+var COLOR_HEADER = '#fff';
 exports.COLOR_HEADER = COLOR_HEADER;
-var COLOR_HEADER_SELECTED = "#fff";
+var COLOR_HEADER_SELECTED = '#fff';
 
 exports.COLOR_HEADER_SELECTED = COLOR_HEADER_SELECTED;
-var DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 exports.DAYS = DAYS;
-var HOURS = "12 am,1 am,2 am,3 am,4 am,5 am,6 am,7 am,8 am,9 am,10 am,11 am,12 pm,1 pm,2 pm,3 pm,4 pm,5 pm,6 pm,7 pm,8 pm,9 pm,10 pm,11 pm".toUpperCase().split(",");
+var HOURS = '12 am,1 am,2 am,3 am,4 am,5 am,6 am,7 am,8 am,9 am,10 am,11 am,12 pm,1 pm,2 pm,3 pm,4 pm,5 pm,6 pm,7 pm,8 pm,9 pm,10 pm,11 pm'.toUpperCase().split(',');
 exports.HOURS = HOURS;
 
 },{}],137:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var COLOR_SELECTED = "#7cdc4b";
-var COLOR_UNSELECTED = "#e3e3e4";
-var COLOR_BORDER = "#f2f2f2";
-var COLOR_HEADER_BG = "#777572";
-var COLOR_HEADER_BG_SELECTED = "#61c72d";
-var COLOR_HEADER = "#fff";
-var COLOR_HEADER_SELECTED = "#fff";
+var COLOR_SELECTED = '#7cdc4b';
+var COLOR_UNSELECTED = '#e3e3e4';
+var COLOR_BORDER = '#f2f2f2';
+var COLOR_HEADER_BG = '#777572';
+var COLOR_HEADER_BG_SELECTED = '#61c72d';
+var COLOR_HEADER = '#fff';
+var COLOR_HEADER_SELECTED = '#fff';
 
 var Theme = function Theme() {
     var customTheme = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -35546,7 +35610,8 @@ var Theme = function Theme() {
     if (customTheme.header) {
         this.header = {
             color: [customTheme.header.color && customTheme.header.color[0] || COLOR_HEADER, customTheme.header.color && customTheme.header.color[1] || COLOR_HEADER_SELECTED],
-            backgroundColor: [customTheme.header.backgroundColor && customTheme.header.backgroundColor[0] || COLOR_HEADER_BG, customTheme.header.backgroundColor && customTheme.header.backgroundColor[1] || COLOR_HEADER_BG_SELECTED]
+            backgroundColor: [customTheme.header.backgroundColor && customTheme.header.backgroundColor[0] || COLOR_HEADER_BG, customTheme.header.backgroundColor && customTheme.header.backgroundColor[1] || COLOR_HEADER_BG_SELECTED],
+            fontFamily: customTheme.header.fontFamily || ''
         };
     } else {
         this.header = {
@@ -35565,39 +35630,39 @@ var Theme = function Theme() {
     }
 };
 
-exports["default"] = Theme;
-module.exports = exports["default"];
+exports['default'] = Theme;
+module.exports = exports['default'];
 
 },{}],"react-daytime":[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _uuid4 = require("uuid4");
+var _uuid4 = require('uuid4');
 
 var _uuid42 = _interopRequireDefault(_uuid4);
 
-var _canvas = require("./canvas");
+var _canvas = require('./canvas');
 
 var _canvas2 = _interopRequireDefault(_canvas);
 
-var _constants = require("./constants");
+var _constants = require('./constants');
 
 var ReactDaytime = (function (_React$Component) {
     _inherits(ReactDaytime, _React$Component);
@@ -35605,31 +35670,37 @@ var ReactDaytime = (function (_React$Component) {
     function ReactDaytime(props) {
         _classCallCheck(this, ReactDaytime);
 
-        _get(Object.getPrototypeOf(ReactDaytime.prototype), "constructor", this).call(this, props);
-        this.canvasId = "react-daytime-" + (0, _uuid42["default"])();
+        _get(Object.getPrototypeOf(ReactDaytime.prototype), 'constructor', this).call(this, props);
+        this.canvasId = 'react-daytime-' + (0, _uuid42['default'])();
     }
 
     _createClass(ReactDaytime, [{
-        key: "componentWillMount",
+        key: 'componentWillMount',
         value: function componentWillMount() {
-            this.canvas = new _canvas2["default"](this.props.onChange, this.props.defaultValue, this.props.theme);
+            this.canvas = new _canvas2['default'](this.props.onChange, this.props.defaultValue, this.props.theme);
         }
     }, {
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {
             this.canvas.render(this.canvasId);
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
-            return _react2["default"].createElement("canvas", { id: this.canvasId, width: _constants.WIDTH, height: _constants.HEIGHT });
+            return _react2['default'].createElement('canvas', { id: this.canvasId, width: _constants.WIDTH, height: _constants.HEIGHT });
         }
     }]);
 
     return ReactDaytime;
-})(_react2["default"].Component);
+})(_react2['default'].Component);
 
-exports["default"] = ReactDaytime;
-module.exports = exports["default"];
+ReactDaytime.propTypes = {
+    defaultValue: _react2['default'].PropTypes.object,
+    onChange: _react2['default'].PropTypes.func,
+    theme: _react2['default'].PropTypes.object
+};
+
+exports['default'] = ReactDaytime;
+module.exports = exports['default'];
 
 },{"./canvas":134,"./constants":136,"react":undefined,"uuid4":132}]},{},[]);
